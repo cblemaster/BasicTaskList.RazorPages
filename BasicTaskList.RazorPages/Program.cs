@@ -1,7 +1,19 @@
+using BasicTaskList.RazorPages.Data.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+var config = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+            .Build();
+
+var connectionString = config.GetConnectionString("Project");
+
+builder.Services.AddDbContext<BasicTaskListContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
