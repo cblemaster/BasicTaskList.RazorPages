@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BasicTaskList.RazorPages.Data.Context;
 using BasicTaskList.RazorPages.Data.Entities;
+using Task = BasicTaskList.RazorPages.Data.Entities.Task;
 
 namespace BasicTaskList.RazorPages.Pages.Tasks
 {

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BasicTaskList.RazorPages.Data.Context;
 using BasicTaskList.RazorPages.Data.Entities;
+using Task = BasicTaskList.RazorPages.Data.Entities.Task;
 
 namespace BasicTaskList.RazorPages.Pages.Tasks
 {
@@ -21,14 +22,14 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 
       public Task Task { get; set; } = default!; 
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async System.Threading.Tasks.Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Tasks == null)
             {
                 return NotFound();
             }
 
-            var task = await _context.Tasks.FirstOrDefaultAsync(m => m.Id == id);
+            Task task = await _context.Tasks.FirstOrDefaultAsync(m => m.Id == id);
             if (task == null)
             {
                 return NotFound();

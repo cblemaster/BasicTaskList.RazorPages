@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BasicTaskList.RazorPages.Data.Context;
 using BasicTaskList.RazorPages.Data.Entities;
+using Task = BasicTaskList.RazorPages.Data.Entities.Task;
 
 namespace BasicTaskList.RazorPages.Pages.Tasks
 {
@@ -21,7 +22,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 
         public IList<Task> Task { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async System.Threading.Tasks.Task OnGetAsync()
         {
             if (_context.Tasks != null)
             {
