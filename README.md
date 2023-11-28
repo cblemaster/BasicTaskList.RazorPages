@@ -3,9 +3,10 @@
 ## An application that provides basic task list functionality
 
 ### Built with:
+- .NET 7 / C# 11
 - SQL Server database
 - ASP.NET Core Web App (Razor Pages) project
-- .NET 8 / C# 12
+- Entity Framework Core 7
 
 ### Features:
 - See a list of folders that contain tasks, and the count of tasks in each folder
