@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using BasicTaskList.RazorPages.Data.Context;
-using BasicTaskList.RazorPages.Data.Entities;
 using Task = BasicTaskList.RazorPages.Data.Entities.Task;
 
 namespace BasicTaskList.RazorPages.Pages.Tasks
@@ -22,12 +15,20 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 
         public IList<Task> Task { get;set; } = default!;
 
-        public async System.Threading.Tasks.Task OnGetAsync()
+        public async System.Threading.Tasks.Task OnGetAsync(int? id)
         {
             if (_context.Tasks != null)
             {
-                Task = await _context.Tasks
-                .Include(t => t.Folder).ToListAsync();
+                if (id != null)
+                {
+                    Task = await _context.Tasks.Where(t => t.FolderId == id)
+                        .Include(t => t.Folder).ToListAsync();
+                }
+                else
+                {
+                    Task = await _context.Tasks
+                        .Include(t => t.Folder).ToListAsync();
+                }
             }
         }
     }
