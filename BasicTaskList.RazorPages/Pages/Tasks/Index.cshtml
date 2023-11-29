@@ -2,14 +2,16 @@
 @model BasicTaskList.RazorPages.Pages.Tasks.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tasks";
 }
 
-<h1>Index</h1>
-
-@if (!Model.IsShowingAllTasks)
+@if (Model.IsShowingAllTasks)
 {
-    <h2>Tasks in: @Model.Task[0].Folder.Name</h2>
+    <h1>Tasks</h1>
+}
+else
+{
+    <h1>Tasks in folder: @Model.Task[0].Folder.Name</h1>
 }
 
 <p>

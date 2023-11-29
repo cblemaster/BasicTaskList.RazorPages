@@ -18,14 +18,14 @@ namespace BasicTaskList.RazorPages.Pages.Folders
         [BindProperty]
         public Folder Folder { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? folderid)
         {
-            if (id == null || _context.Folders == null)
+            if (folderid == null || _context.Folders == null)
             {
                 return NotFound();
             }
 
-            var folder = await _context.Folders.FirstOrDefaultAsync(m => m.Id == id);
+            var folder = await _context.Folders.FirstOrDefaultAsync(m => m.Id == folderid);
             if (folder == null)
             {
                 return NotFound();
