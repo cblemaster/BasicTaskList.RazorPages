@@ -16,6 +16,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Folder[0].Name)
             </th>
+            <th>
+                Tasks Count
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -26,8 +29,11 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="../Tasks/Index" asp-route-id="@item.Id">Details</a> |
+                @Html.DisplayFor(modelItem => item.Tasks.Count)
+            </td>
+            <td>
+                <a asp-page="../Tasks/Index" asp-route-id="@item.Id">Show Tasks</a> |
+                <a asp-page="./Edit" asp-route-id="@item.Id">Rename</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

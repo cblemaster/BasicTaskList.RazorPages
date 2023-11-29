@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using BasicTaskList.RazorPages.Data.Entities;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using BasicTaskList.RazorPages.Data.Context;
-using BasicTaskList.RazorPages.Data.Entities;
 
 namespace BasicTaskList.RazorPages.Pages.Folders
 {
@@ -25,7 +19,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
         {
             if (_context.Folders != null)
             {
-                Folder = await _context.Folders.ToListAsync();
+                Folder = await _context.Folders.Include(f => f.Tasks).ToListAsync();  //TODO: The only reason I'm getting Tasks here is so I can count 'em; use an unmapped property on the entity class instead
             }
         }
     }
