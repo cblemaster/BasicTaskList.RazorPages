@@ -9,15 +9,9 @@ namespace BasicTaskList.RazorPages.Pages.Folders
     {
         private readonly BasicTaskListContext _context;
 
-        public CreateModel(BasicTaskListContext context)
-        {
-            _context = context;
-        }
+        public CreateModel(BasicTaskListContext context) => _context = context;
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
+        public IActionResult OnGet() => Page();
 
         [BindProperty]
         public Folder Folder { get; set; } = default!;

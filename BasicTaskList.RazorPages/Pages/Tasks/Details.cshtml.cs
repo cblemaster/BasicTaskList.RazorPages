@@ -20,7 +20,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
         public async System.Threading.Tasks.Task<IActionResult> OnGetAsync(int? id, int? folderid)
         {
             FolderId = folderid;
-            
+
             if (id == null || _context.Tasks == null)
             {
                 return NotFound();

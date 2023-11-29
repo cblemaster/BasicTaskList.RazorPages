@@ -10,10 +10,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
     {
         private readonly BasicTaskListContext _context;
 
-        public EditModel(BasicTaskListContext context)
-        {
-            _context = context;
-        }
+        public EditModel(BasicTaskListContext context) => _context = context;
 
         [BindProperty]
         public Folder Folder { get; set; } = default!;
@@ -25,7 +22,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
                 return NotFound();
             }
 
-            var folder = await _context.Folders.FirstOrDefaultAsync(m => m.Id == folderid);
+            Folder? folder = await _context.Folders.FirstOrDefaultAsync(m => m.Id == folderid);
             if (folder == null)
             {
                 return NotFound();
@@ -64,9 +61,6 @@ namespace BasicTaskList.RazorPages.Pages.Folders
             return RedirectToPage("./Index");
         }
 
-        private bool FolderExists(int id)
-        {
-            return (_context.Folders?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        private bool FolderExists(int id) => (_context.Folders?.Any(e => e.Id == id)).GetValueOrDefault();
     }
 }

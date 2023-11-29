@@ -10,10 +10,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
     {
         private readonly BasicTaskListContext _context;
 
-        public DeleteModel(BasicTaskListContext context)
-        {
-            _context = context;
-        }
+        public DeleteModel(BasicTaskListContext context) => _context = context;
 
         [BindProperty]
         public Folder Folder { get; set; } = default!;
@@ -25,7 +22,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
                 return NotFound();
             }
 
-            var folder = await _context.Folders.FirstOrDefaultAsync(m => m.Id == folderid);
+            Folder? folder = await _context.Folders.FirstOrDefaultAsync(m => m.Id == folderid);
 
             if (folder == null)
             {
@@ -44,7 +41,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
             {
                 return NotFound();
             }
-            var folder = await _context.Folders.FindAsync(id);
+            Folder? folder = await _context.Folders.FindAsync(id);
 
             if (folder != null)
             {
