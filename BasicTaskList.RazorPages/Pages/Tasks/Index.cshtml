@@ -23,10 +23,10 @@
                 @Html.DisplayNameFor(model => model.Task[0].DueDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Task[0].IsComplete)
+                @Html.DisplayNameFor(model => model.Task[0].IsImportant)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Task[0].IsImportant)
+                @Html.DisplayNameFor(model => model.Task[0].IsComplete)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Task[0].Folder)
@@ -47,11 +47,11 @@
                 @Html.DisplayFor(modelItem => item.DueDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsComplete)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.IsImportant)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsComplete)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Folder.Id)
             </td>
