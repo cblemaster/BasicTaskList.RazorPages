@@ -8,12 +8,10 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
     {
         private readonly BasicTaskList.RazorPages.Data.Context.BasicTaskListContext _context;
 
-        public IndexModel(BasicTaskList.RazorPages.Data.Context.BasicTaskListContext context)
-        {
+        public IndexModel(BasicTaskList.RazorPages.Data.Context.BasicTaskListContext context) =>
             _context = context;
-        }
 
-        public IList<Task> Task { get;set; } = default!;
+        public IList<Task> Task { get; set; } = default!;
 
         public bool IsShowingAllTasks { get; set; }
 

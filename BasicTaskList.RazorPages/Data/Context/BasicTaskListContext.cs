@@ -25,12 +25,9 @@ public partial class BasicTaskListContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Folder>(entity =>
-        {
-            entity.Property(e => e.Name)
+        modelBuilder.Entity<Folder>(entity => entity.Property(e => e.Name)
                 .HasMaxLength(255)
-                .IsUnicode(false);
-        });
+                .IsUnicode(false));
 
         modelBuilder.Entity<Task>(entity =>
         {

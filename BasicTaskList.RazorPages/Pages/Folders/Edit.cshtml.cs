@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BasicTaskList.RazorPages.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BasicTaskList.RazorPages.Data.Context;
-using BasicTaskList.RazorPages.Data.Entities;
 
 namespace BasicTaskList.RazorPages.Pages.Folders
 {
@@ -30,7 +24,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
                 return NotFound();
             }
 
-            var folder =  await _context.Folders.FirstOrDefaultAsync(m => m.Id == id);
+            var folder = await _context.Folders.FirstOrDefaultAsync(m => m.Id == id);
             if (folder == null)
             {
                 return NotFound();
@@ -71,7 +65,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
 
         private bool FolderExists(int id)
         {
-          return (_context.Folders?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Folders?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

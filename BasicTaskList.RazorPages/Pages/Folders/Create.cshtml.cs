@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BasicTaskList.RazorPages.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using BasicTaskList.RazorPages.Data.Context;
-using BasicTaskList.RazorPages.Data.Entities;
 
 namespace BasicTaskList.RazorPages.Pages.Folders
 {
@@ -26,12 +20,12 @@ namespace BasicTaskList.RazorPages.Pages.Folders
 
         [BindProperty]
         public Folder Folder { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Folders == null || Folder == null)
+            if (!ModelState.IsValid || _context.Folders == null || Folder == null)
             {
                 return Page();
             }
