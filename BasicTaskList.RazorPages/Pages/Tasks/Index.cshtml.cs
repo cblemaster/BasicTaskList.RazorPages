@@ -15,6 +15,8 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 
         public IList<Task> Task { get;set; } = default!;
 
+        public bool IsShowingAllTasks { get; set; }
+
         public async System.Threading.Tasks.Task OnGetAsync(int? id)
         {
             if (_context.Tasks != null)
@@ -26,6 +28,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
                 }
                 else
                 {
+                    IsShowingAllTasks = true;
                     Task = await _context.Tasks
                         .Include(t => t.Folder).ToListAsync();
                 }

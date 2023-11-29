@@ -22,7 +22,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 
         public IActionResult OnGet()
         {
-        ViewData["FolderId"] = new SelectList(_context.Folders, "Id", "Id");
+        ViewData["FolderId"] = new SelectList(_context.Folders, "Id", "Name");
             return Page();
         }
 

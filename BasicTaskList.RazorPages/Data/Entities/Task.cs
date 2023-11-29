@@ -23,6 +23,7 @@ public partial class Task
     [Display(Name = "Is Important")]
     public bool IsImportant { get; set; }
 
+    [Display(Name = "Folder")]
     public int FolderId { get; set; }
 
     public virtual Folder Folder { get; set; } = null!;

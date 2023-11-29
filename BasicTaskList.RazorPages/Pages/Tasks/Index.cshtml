@@ -7,6 +7,11 @@
 
 <h1>Index</h1>
 
+@if (!Model.IsShowingAllTasks)
+{
+    <h2>Tasks in: @Model.Task[0].Folder.Name</h2>
+}
+
 <p>
     <a asp-page="Create">Create New</a>
 </p>
@@ -28,9 +33,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Task[0].IsComplete)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Task[0].Folder)
-            </th>
+            @if (Model.IsShowingAllTasks)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Task[0].Folder)
+                </th>
+            }
             <th></th>
         </tr>
     </thead>
@@ -51,10 +59,13 @@
             </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IsComplete)
-                </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Folder.Id)
             </td>
+            @if (Model.IsShowingAllTasks)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Folder.Name)
+                </td>
+            }
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
@@ -64,3 +75,5 @@
 }
     </tbody>
 </table>
+
+<a asp-page="../Folders/Index">Back to Folders</a>

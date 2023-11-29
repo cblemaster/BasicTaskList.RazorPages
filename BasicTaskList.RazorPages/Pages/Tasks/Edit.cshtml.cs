@@ -37,7 +37,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
                 return NotFound();
             }
             Task = task;
-           ViewData["FolderId"] = new SelectList(_context.Folders, "Id", "Id");
+           ViewData["FolderId"] = new SelectList(_context.Folders, "Id", "Name");
             return Page();
         }
 
