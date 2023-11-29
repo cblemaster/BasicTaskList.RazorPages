@@ -1,4 +1,5 @@
-﻿using BasicTaskList.RazorPages.Data.Entities;
+﻿using BasicTaskList.RazorPages.Data.Context;
+using BasicTaskList.RazorPages.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +8,9 @@ namespace BasicTaskList.RazorPages.Pages.Folders
 {
     public class DeleteModel : PageModel
     {
-        private readonly BasicTaskList.RazorPages.Data.Context.BasicTaskListContext _context;
+        private readonly BasicTaskListContext _context;
 
-        public DeleteModel(BasicTaskList.RazorPages.Data.Context.BasicTaskListContext context)
+        public DeleteModel(BasicTaskListContext context)
         {
             _context = context;
         }

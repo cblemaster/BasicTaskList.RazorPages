@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using BasicTaskList.RazorPages.Data.Context;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Task = BasicTaskList.RazorPages.Data.Entities.Task;
 
@@ -6,9 +7,9 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 {
     public class IndexModel : PageModel
     {
-        private readonly BasicTaskList.RazorPages.Data.Context.BasicTaskListContext _context;
+        private readonly BasicTaskListContext _context;
 
-        public IndexModel(BasicTaskList.RazorPages.Data.Context.BasicTaskListContext context) =>
+        public IndexModel(BasicTaskListContext context) =>
             _context = context;
 
         public IList<Task> Task { get; set; } = default!;

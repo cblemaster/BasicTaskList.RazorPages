@@ -1,4 +1,5 @@
-﻿using BasicTaskList.RazorPages.Data.Entities;
+﻿using BasicTaskList.RazorPages.Data.Context;
+using BasicTaskList.RazorPages.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,9 +7,9 @@ namespace BasicTaskList.RazorPages.Pages.Folders
 {
     public class CreateModel : PageModel
     {
-        private readonly BasicTaskList.RazorPages.Data.Context.BasicTaskListContext _context;
+        private readonly BasicTaskListContext _context;
 
-        public CreateModel(BasicTaskList.RazorPages.Data.Context.BasicTaskListContext context)
+        public CreateModel(BasicTaskListContext context)
         {
             _context = context;
         }
