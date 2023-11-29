@@ -30,7 +30,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
                 return NotFound();
             }
 
-            var task = await _context.Tasks.FirstOrDefaultAsync(m => m.Id == id);
+            var task = await _context.Tasks.Include(t => t.Folder).FirstOrDefaultAsync(m => m.Id == id);
 
             if (task == null)
             {
