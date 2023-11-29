@@ -32,9 +32,9 @@
                 @Html.DisplayFor(modelItem => item.Tasks.Count)
             </td>
             <td>
-                <a asp-page="../Tasks/Index" asp-route-id="@item.Id">Show Tasks</a> |
-                <a asp-page="./Edit" asp-route-id="@item.Id">Rename</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="../Tasks/Index" asp-route-folderid="@item.Id">Show Tasks</a> |
+                <a asp-page="./Edit" asp-route-folderid="@item.Id">Rename</a> |
+                <a asp-page="./Delete" asp-route-folderid="@item.Id">Delete</a>
             </td>
         </tr>
 }
