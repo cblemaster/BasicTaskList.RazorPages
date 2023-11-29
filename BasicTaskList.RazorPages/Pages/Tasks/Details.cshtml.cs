@@ -14,8 +14,12 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 
         public Task Task { get; set; } = default!;
 
-        public async System.Threading.Tasks.Task<IActionResult> OnGetAsync(int? id)
+        public int? FolderId { get; set; }
+
+        public async System.Threading.Tasks.Task<IActionResult> OnGetAsync(int? id, int? folderid)
         {
+            FolderId = folderid;
+            
             if (id == null || _context.Tasks == null)
             {
                 return NotFound();

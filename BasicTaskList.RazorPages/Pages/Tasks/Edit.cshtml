@@ -52,7 +52,14 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    @if (Model.FolderId.HasValue)
+    {
+        <a asp-page="./Index" asp-route-folderid="@Model.FolderId">Back to List</a>
+    }
+    else
+    {
+        <a asp-page="./Index">Back to List</a>
+    }
 </div>
 
 @section Scripts {

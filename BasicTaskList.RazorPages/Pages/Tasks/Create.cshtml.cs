@@ -12,14 +12,17 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
         public CreateModel(BasicTaskList.RazorPages.Data.Context.BasicTaskListContext context) =>
             _context = context;
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int? folderid)
         {
+            FolderId = folderid;
             ViewData["FolderId"] = new SelectList(_context.Folders, "Id", "Name");
             return Page();
         }
 
         [BindProperty]
         public Task Task { get; set; } = default!;
+
+        public int? FolderId { get; set; }
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
