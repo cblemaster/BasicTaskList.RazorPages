@@ -37,10 +37,14 @@
                     <input class="form-check-input" asp-for="Task.IsComplete" /> @Html.DisplayNameFor(model => model.Task.IsComplete)
                 </label>
             </div>
-            <div class="form-group">
-                <label asp-for="Task.FolderId" class="control-label"></label>
-                <select asp-for="Task.FolderId" class ="form-control" asp-items="ViewBag.FolderId"></select>
-            </div>
+            @if (!Model.FolderId.HasValue)
+            {
+                <div class="form-group">
+                    <label asp-for="Task.FolderId" class="control-label"></label>
+                    <select asp-for="Task.FolderId" class="form-control" asp-items="ViewBag.FolderNames"></select>
+                    <span asp-validation-for="Task.FolderId" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

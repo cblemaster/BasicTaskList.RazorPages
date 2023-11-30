@@ -11,19 +11,15 @@ namespace BasicTaskList.RazorPages.Pages.Folders
 
         public CreateModel(BasicTaskListContext context) => _context = context;
 
-        public IActionResult OnGet() => Page();
-
         [BindProperty]
         public Folder Folder { get; set; } = default!;
 
+        public IActionResult OnGet() => Page();
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.Folders == null || Folder == null)
-            {
-                return Page();
-            }
+            if (!ModelState.IsValid || _context.Folders == null || Folder == null) { return Page(); }
 
             _context.Folders.Add(Folder);
             await _context.SaveChangesAsync();

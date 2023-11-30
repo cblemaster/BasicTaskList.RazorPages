@@ -17,17 +17,12 @@ namespace BasicTaskList.RazorPages.Pages.Folders
 
         public async Task<IActionResult> OnGetAsync(int? folderid)
         {
-            if (folderid == null || _context.Folders == null)
-            {
-                return NotFound();
-            }
+            if (folderid == null || _context.Folders == null) { return NotFound(); }
 
             Folder? folder = await _context.Folders.FirstOrDefaultAsync(m => m.Id == folderid);
-            if (folder == null)
-            {
-                return NotFound();
-            }
+            if (folder == null) { return NotFound(); }
             Folder = folder;
+            
             return Page();
         }
 
@@ -35,10 +30,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            if (!ModelState.IsValid) { return Page(); }
 
             _context.Attach(Folder).State = EntityState.Modified;
 
@@ -48,14 +40,8 @@ namespace BasicTaskList.RazorPages.Pages.Folders
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FolderExists(Folder.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!FolderExists(Folder.Id)) { return NotFound(); }
+                else { throw; }
             }
 
             return RedirectToPage("./Index");

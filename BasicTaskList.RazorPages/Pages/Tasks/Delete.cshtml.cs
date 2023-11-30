@@ -10,8 +10,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
     {
         private readonly BasicTaskListContext _context;
 
-        public DeleteModel(BasicTaskListContext context) =>
-            _context = context;
+        public DeleteModel(BasicTaskListContext context) => _context = context;
 
         [BindProperty]
         public Task Task { get; set; } = default!;
@@ -22,30 +21,19 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
         {
             FolderId = folderid;
 
-            if (id == null || _context.Tasks == null)
-            {
-                return NotFound();
-            }
+            if (id == null || _context.Tasks == null) { return NotFound(); }
 
             Task? task = await _context.Tasks.Include(t => t.Folder).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (task == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                Task = task;
-            }
+            if (task == null) { return NotFound(); }
+            else { Task = task; }
+            
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? id, int? folderid)
         {
-            if (id == null || _context.Tasks == null)
-            {
-                return NotFound();
-            }
+            if (id == null || _context.Tasks == null) { return NotFound(); }
             Task? task = await _context.Tasks.FindAsync(id);
 
             if (task != null)
@@ -55,7 +43,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return folderid.HasValue ? RedirectToPage($"./Index", new { folderid = Task.FolderId }) : RedirectToPage("./Index");
         }
     }
 }

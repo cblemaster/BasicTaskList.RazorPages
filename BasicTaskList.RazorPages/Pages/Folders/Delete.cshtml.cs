@@ -3,6 +3,7 @@ using BasicTaskList.RazorPages.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Task = BasicTaskList.RazorPages.Data.Entities.Task;
 
 namespace BasicTaskList.RazorPages.Pages.Folders
 {
@@ -17,35 +18,28 @@ namespace BasicTaskList.RazorPages.Pages.Folders
 
         public async Task<IActionResult> OnGetAsync(int? folderid)
         {
-            if (folderid == null || _context.Folders == null)
-            {
-                return NotFound();
-            }
+            if (folderid == null || _context.Folders == null) { return NotFound(); }
 
             Folder? folder = await _context.Folders.FirstOrDefaultAsync(m => m.Id == folderid);
 
-            if (folder == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                Folder = folder;
-            }
+            if (folder == null) { return NotFound(); }
+            else { Folder = folder; }
+            
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int? folderid)
         {
-            if (id == null || _context.Folders == null)
-            {
-                return NotFound();
-            }
-            Folder? folder = await _context.Folders.FindAsync(id);
+            if (folderid == null || _context.Folders == null) { return NotFound(); }
+            Folder? folder = await _context.Folders.Include(f => f.Tasks).FirstOrDefaultAsync(f => f.Id == folderid);
 
             if (folder != null)
             {
                 Folder = folder;
+                foreach (Task task in Folder.Tasks)
+                {
+                    _context.Tasks.Remove(task);
+                }
                 _context.Folders.Remove(Folder);
                 await _context.SaveChangesAsync();
             }

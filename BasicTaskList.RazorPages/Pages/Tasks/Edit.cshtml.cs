@@ -11,8 +11,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
     {
         private readonly BasicTaskListContext _context;
 
-        public EditModel(BasicTaskListContext context) =>
-            _context = context;
+        public EditModel(BasicTaskListContext context) => _context = context;
 
         [BindProperty]
         public Task Task { get; set; } = default!;
@@ -23,29 +22,29 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
         {
             FolderId = folderid;
 
-            if (id == null || _context.Tasks == null)
-            {
-                return NotFound();
-            }
+            if (id == null || _context.Tasks == null) { return NotFound(); }
 
             Task? task = await _context.Tasks.FirstOrDefaultAsync(m => m.Id == id);
-            if (task == null)
-            {
-                return NotFound();
-            }
+            if (task == null) { return NotFound(); }
             Task = task;
-            ViewData["FolderId"] = new SelectList(_context.Folders, "Id", "Name");
+            
+            ViewData["FolderNames"] = new SelectList(_context.Folders, "Id", "Name");
+            
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? folderid)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            Task.Folder = (await _context.Folders.FirstOrDefaultAsync(f => f.Id == Task.FolderId))!;
+
+            if (Task.Folder == null) { return Page(); }
+            ModelState.Remove("Task.Folder");
+
+            if (!ModelState.IsValid) { return Page(); }
+
+            Task.FolderId = Task.Folder.Id;
 
             _context.Attach(Task).State = EntityState.Modified;
 
@@ -55,17 +54,11 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TaskExists(Task.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!TaskExists(Task.Id)) { return NotFound(); }
+                else { throw; }
             }
 
-            return RedirectToPage("./Index");
+            return folderid.HasValue ? RedirectToPage($"./Index", new { folderid = Task.FolderId }) : RedirectToPage("./Index");
         }
 
         private bool TaskExists(int id) =>

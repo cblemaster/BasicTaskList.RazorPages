@@ -9,9 +9,9 @@
 {
     <h1>Tasks</h1>
 }
-else
+else if (Model.Folder != null)
 {
-    <h1>Tasks in folder: @Model.Task[0].Folder.Name</h1>
+    <h1>Tasks in folder: @Model.Folder.Name</h1>
 }
 
 <p>
