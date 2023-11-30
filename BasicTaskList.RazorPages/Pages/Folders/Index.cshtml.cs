@@ -17,7 +17,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
         {
             if (_context.Folders != null)
             {
-                Folder = await _context.Folders.Include(f => f.Tasks).ToListAsync();
+                Folder = await _context.Folders.Include(f => f.Tasks).OrderBy(f => f.Name).ToListAsync();
             }
         }
     }

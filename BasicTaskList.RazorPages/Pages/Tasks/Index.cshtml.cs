@@ -32,14 +32,15 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
             {
                 if (folderid.HasValue)
                 {
-                    Task = await _context.Tasks.Where(t => t.FolderId == folderid)
-                        .Include(t => t.Folder).ToListAsync();
+                    Task = await _context.Tasks
+                        .Where(t => t.FolderId == folderid).Include(t => t.Folder)
+                        .OrderBy(t => t.DueDate).ThenBy(t => t.Name).ToListAsync();
                 }
                 else
                 {
                     IsShowingAllTasks = true;
-                    Task = await _context.Tasks
-                        .Include(t => t.Folder).ToListAsync();
+                    Task = await _context.Tasks.Include(t => t.Folder)
+                        .OrderBy(t => t.DueDate).ThenBy(t => t.Name).ToListAsync();
                 }
             }
         }
