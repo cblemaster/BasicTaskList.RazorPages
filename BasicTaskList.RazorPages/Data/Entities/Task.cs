@@ -6,15 +6,16 @@ public partial class Task
 {
     public int Id { get; set; }
 
-    [Required]      //TODO: Can data annotations be replaced with fluent api in the db context?
-    [MaxLength(255)]
+    [Required(ErrorMessage = "Task name is required")]      //TODO: Can data annotations be replaced with fluent api in the db context?
+    [MaxLength(255, ErrorMessage = "Max length for task name is 255")]
     public string Name { get; set; } = null!;
 
-    [MaxLength(255)]
+    [MaxLength(255, ErrorMessage = "Max length for notes is 255")]
     public string? Notes { get; set; }
 
     [Display(Name = "Due Date")]
     [DisplayFormat(DataFormatString = "{0:d}")]
+    [Required(ErrorMessage = "Due date is required")]
     public DateTime DueDate { get; set; }
 
     [Display(Name = "Is Complete")]
