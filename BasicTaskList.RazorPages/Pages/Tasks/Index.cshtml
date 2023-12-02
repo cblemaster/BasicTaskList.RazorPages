@@ -5,9 +5,9 @@
     ViewData["Title"] = "Tasks";
 }
 
-@if (Model.IsShowingAllTasks)
+@if (!Model.IsShowingTasksInFolder)
 {
-    <h1>Tasks</h1>
+    <h1>All Tasks</h1>
 }
 else if (Model.Folder != null)
 {
@@ -22,7 +22,7 @@ else if (Model.Folder != null)
     <div class="form-group form-check">
         <input type="hidden" name="folderid" value="@Model.FolderId" />
         <label class="form-check-label">            
-            <input class="form-check-input" onclick="document.form.submit()" asp-for="@Model.IsShowingAllTasks" />
+            <input class="form-check-input" onclick="document.form.submit()" asp-for="@Model.IsShowingCompletedTasks" />
             Show Complete
         </label>
     </div>
@@ -46,7 +46,7 @@ else if (Model.Folder != null)
             <th>
                 @Html.DisplayNameFor(model => model.Task[0].IsComplete)
             </th>
-            @if (Model.IsShowingAllTasks)
+            @if (Model.IsShowingTasksInFolder)
             {
                 <th>
                     @Html.DisplayNameFor(model => model.Task[0].Folder)
@@ -73,7 +73,7 @@ else if (Model.Folder != null)
                 <td>
                     @Html.DisplayFor(modelItem => item.IsComplete)
             </td>
-            @if (Model.IsShowingAllTasks)
+            @if (Model.IsShowingTasksInFolder)
             {
                 <td>
                     @Html.DisplayFor(modelItem => item.Folder.Name)

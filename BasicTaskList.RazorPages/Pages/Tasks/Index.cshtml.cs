@@ -18,42 +18,43 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 
         public Folder? Folder { get; set; }
 
-        public bool IsShowingAllTasks { get; set; }
+        public bool IsShowingTasksInFolder { get; set; }
 
-        public async System.Threading.Tasks.Task OnGetAsync(int? folderid, bool? isshowingalltasks)
+        public bool IsShowingCompletedTasks { get; set; }
+
+        public async System.Threading.Tasks.Task OnGetAsync(int? folderid, bool? isshowingcompletedtasks)
         {
+            IsShowingTasksInFolder = false;
+
             FolderId = folderid;
-            if (FolderId.HasValue && _context.Folders != null)
+            if (FolderId.HasValue) { IsShowingTasksInFolder = true; }
+
+            if (IsShowingTasksInFolder && _context.Folders != null)
             {
                 Folder = await _context.Folders.FirstOrDefaultAsync(f => f.Id == FolderId);
             }
 
             if (_context.Tasks != null)
             {
-                IQueryable<Task> taskQuery = default!;
-
-                if (FolderId.HasValue)
-                {
-                    taskQuery = _context.Tasks.Where(t => t.FolderId == FolderId)
-                        .Include(t => t.Folder).OrderBy(t => t.DueDate).ThenBy(t => t.Name);
-                }
-                else
-                {
-                    taskQuery = _context.Tasks.Include(t => t.Folder)
+                IQueryable<Task> taskQuery = _context.Tasks.Include(t => t.Folder)
                         .OrderBy(t => t.DueDate).ThenBy(t => t.Name);
-                }
 
-                if (isshowingalltasks.HasValue)
+                if (IsShowingTasksInFolder)
                 {
-                    IsShowingAllTasks = isshowingalltasks.Value;
+                    taskQuery = taskQuery.Where(t => t.FolderId == FolderId);
                 }
 
-                if (!IsShowingAllTasks)
+                if (isshowingcompletedtasks.HasValue)
+                {
+                    IsShowingCompletedTasks = isshowingcompletedtasks.Value;
+                }
+
+                if (!IsShowingCompletedTasks)
                 {
                     taskQuery = taskQuery.Where(t => !t.IsComplete);
                 }
 
-                Task = taskQuery.ToList();
+                Task = await taskQuery.ToListAsync();
             }
         }
     }
