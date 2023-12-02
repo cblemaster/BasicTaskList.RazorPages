@@ -1,0 +1,80 @@
+﻿@page
+@model BasicTaskList.RazorPages.Pages.Tasks.ImportantModel
+
+@{
+    ViewData["Title"] = "Important Tasks";
+}
+
+<h1>Important Tasks</h1>
+
+@*<p>
+    <a asp-page="Create" asp-route-folderid="@Model.FolderId">Create New</a>
+</p>*@
+
+<form method="get" name="form">
+    <div class="form-group form-check">
+        <label class="form-check-label">            
+            <input class="form-check-input" onclick="document.form.submit()" asp-for="@Model.IsShowingCompletedTasks" />
+            Show Complete
+        </label>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Task[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Task[0].Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Task[0].DueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Task[0].IsImportant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Task[0].IsComplete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Task[0].Folder)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Task) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsImportant)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsComplete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Folder.Name)
+            </td>
+            <td>
+                <div>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id"> Details </a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id"> Delete </a>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<a asp-page="../Folders/Index">Back to Folders</a>
