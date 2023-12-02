@@ -1,5 +1,5 @@
 ﻿@page
-@model BasicTaskList.RazorPages.Pages.Tasks.ImportantModel
+@model BasicTaskList.RazorPages.Pages.Tasks.Important.IndexModel
 
 @{
     ViewData["Title"] = "Important Tasks";
@@ -7,9 +7,9 @@
 
 <h1>Important Tasks</h1>
 
-@*<p>
-    <a asp-page="Create" asp-route-folderid="@Model.FolderId">Create New</a>
-</p>*@
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
 
 <form method="get" name="form">
     <div class="form-group form-check">
@@ -70,11 +70,11 @@
                     <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-page="./Details" asp-route-id="@item.Id"> Details </a> |
                     <a asp-page="./Delete" asp-route-id="@item.Id"> Delete </a>
-                </div>
+                </div>                
             </td>
         </tr>
 }
     </tbody>
 </table>
 
-<a asp-page="../Folders/Index">Back to Folders</a>
+<a asp-page="../../Folders/Index">Back to Folders</a>

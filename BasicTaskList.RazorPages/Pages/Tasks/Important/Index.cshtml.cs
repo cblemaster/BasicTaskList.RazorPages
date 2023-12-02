@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Task = BasicTaskList.RazorPages.Data.Entities.Task;
 
-namespace BasicTaskList.RazorPages.Pages.Tasks
+namespace BasicTaskList.RazorPages.Pages.Tasks.Important
 {
-    public class ImportantModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly BasicTaskListContext _context;
 
-        public ImportantModel(BasicTaskListContext context) => _context = context;
+        public IndexModel(BasicTaskListContext context) => _context = context;
 
         public IList<Task> Task { get; set; } = default!;
 
