@@ -22,7 +22,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
             Folder? folder = await _context.Folders.FirstOrDefaultAsync(m => m.Id == folderid);
             if (folder == null) { return NotFound(); }
             Folder = folder;
-            
+
             return Page();
         }
 

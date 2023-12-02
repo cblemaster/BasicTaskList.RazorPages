@@ -24,7 +24,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
 
             if (folder == null) { return NotFound(); }
             else { Folder = folder; }
-            
+
             return Page();
         }
 

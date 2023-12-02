@@ -27,9 +27,9 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
             Task? task = await _context.Tasks.FirstOrDefaultAsync(m => m.Id == id);
             if (task == null) { return NotFound(); }
             Task = task;
-            
+
             ViewData["FolderNames"] = new SelectList(_context.Folders, "Id", "Name");
-            
+
             return Page();
         }
 
@@ -40,7 +40,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
             Task.Folder = (await _context.Folders.FirstOrDefaultAsync(f => f.Id == Task.FolderId))!;
 
             if (Task.Folder == null) { return Page(); }
-            ModelState.Remove("Task.Folder");
+            ModelState.Remove(nameof(Task.Folder));
 
             if (!ModelState.IsValid) { return Page(); }
 

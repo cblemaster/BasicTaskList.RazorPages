@@ -23,9 +23,9 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
             if (id == null || _context.Tasks == null) { return NotFound(); }
 
             Task task = (await _context.Tasks.Include(t => t.Folder).FirstOrDefaultAsync(m => m.Id == id))!;
-            if (task == null) { return NotFound();}
+            if (task == null) { return NotFound(); }
             else { Task = task; }
-            
+
             return Page();
         }
     }

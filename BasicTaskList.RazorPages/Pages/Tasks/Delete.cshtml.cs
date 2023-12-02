@@ -27,7 +27,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 
             if (task == null) { return NotFound(); }
             else { Task = task; }
-            
+
             return Page();
         }
 

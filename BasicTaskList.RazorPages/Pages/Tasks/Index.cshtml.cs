@@ -47,7 +47,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
                 {
                     IsShowingAllTasks = isshowingalltasks.Value;
                 }
-                
+
                 if (!IsShowingAllTasks)
                 {
                     taskQuery = taskQuery.Where(t => !t.IsComplete);

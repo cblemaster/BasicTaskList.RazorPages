@@ -38,12 +38,12 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
             }
 
             if (Task.Folder == null) { return Page(); }
-            ModelState.Remove("Task.Folder");
-                        
+            ModelState.Remove(nameof(Task.Folder));
+
             if (!ModelState.IsValid || _context.Tasks == null || Task == null) { return Page(); }
 
             Task.FolderId = Task.Folder.Id;
-            
+
             _context.Tasks.Add(Task);
             await _context.SaveChangesAsync();
 
