@@ -20,7 +20,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 
         public bool IsShowingAllTasks { get; set; }
 
-        public async System.Threading.Tasks.Task OnGetAsync(int? folderid)
+        public async System.Threading.Tasks.Task OnGetAsync(int? folderid, bool? isshowingalltasks)
         {
             FolderId = folderid;
             if (FolderId.HasValue && _context.Folders != null)
@@ -30,18 +30,30 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
 
             if (_context.Tasks != null)
             {
-                if (folderid.HasValue)
+                IQueryable<Task> taskQuery = default!;
+
+                if (FolderId.HasValue)
                 {
-                    Task = await _context.Tasks
-                        .Where(t => t.FolderId == folderid).Include(t => t.Folder)
-                        .OrderBy(t => t.DueDate).ThenBy(t => t.Name).ToListAsync();
+                    taskQuery = _context.Tasks.Where(t => t.FolderId == FolderId)
+                        .Include(t => t.Folder).OrderBy(t => t.DueDate).ThenBy(t => t.Name);
                 }
                 else
                 {
-                    IsShowingAllTasks = true;
-                    Task = await _context.Tasks.Include(t => t.Folder)
-                        .OrderBy(t => t.DueDate).ThenBy(t => t.Name).ToListAsync();
+                    taskQuery = _context.Tasks.Include(t => t.Folder)
+                        .OrderBy(t => t.DueDate).ThenBy(t => t.Name);
                 }
+
+                if (isshowingalltasks.HasValue)
+                {
+                    IsShowingAllTasks = isshowingalltasks.Value;
+                }
+                
+                if (!IsShowingAllTasks)
+                {
+                    taskQuery = taskQuery.Where(t => !t.IsComplete);
+                }
+
+                Task = taskQuery.ToList();
             }
         }
     }

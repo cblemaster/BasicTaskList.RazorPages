@@ -17,6 +17,17 @@ else if (Model.Folder != null)
 <p>
     <a asp-page="Create" asp-route-folderid="@Model.FolderId">Create New</a>
 </p>
+
+<form method="get" name="form">
+    <div class="form-group form-check">
+        <input type="hidden" name="folderid" value="@Model.FolderId" />
+        <label class="form-check-label">            
+            <input class="form-check-input" onclick="document.form.submit()" asp-for="@Model.IsShowingAllTasks" />
+            Show Complete
+        </label>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
