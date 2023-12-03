@@ -33,8 +33,6 @@
 ### UI Conventions:
 - Folders shown in a list are always sorted by Name
 - Tasks shown in a list are always sorted by Due Date, then by Name
-- When viewing tasks in a list, those that are important will have their name in bold font
-- When viewing tasks in a list, those that are complete will have their name in strikethrough font
 
 ### Instructions for running the application:
 - Instructions for creating the database from the provided script: TBD
