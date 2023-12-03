@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Database\" />
-    <Folder Include="Pages\Tasks\DueToday\" />
-    <Folder Include="Pages\Tasks\Complete\" />
   </ItemGroup>
 
   <ItemGroup>
