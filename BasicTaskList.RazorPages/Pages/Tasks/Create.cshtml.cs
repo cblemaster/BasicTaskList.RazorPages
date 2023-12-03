@@ -38,7 +38,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
             }
 
             if (Task.Folder == null) { return Page(); }
-            ModelState.Remove(nameof(Task.Folder));
+            ModelState.Remove("Task.Folder");
 
             if (!ModelState.IsValid || _context.Tasks == null || Task == null) { return Page(); }
 

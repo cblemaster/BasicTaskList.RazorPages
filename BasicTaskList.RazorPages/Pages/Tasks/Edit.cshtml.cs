@@ -40,7 +40,7 @@ namespace BasicTaskList.RazorPages.Pages.Tasks
             Task.Folder = (await _context.Folders.FirstOrDefaultAsync(f => f.Id == Task.FolderId))!;
 
             if (Task.Folder == null) { return Page(); }
-            ModelState.Remove(nameof(Task.Folder));
+            ModelState.Remove("Task.Folder");
 
             if (!ModelState.IsValid) { return Page(); }
 

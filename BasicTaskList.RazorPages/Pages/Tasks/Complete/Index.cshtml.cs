@@ -1,5 +1,4 @@
 ﻿using BasicTaskList.RazorPages.Data.Context;
-using BasicTaskList.RazorPages.Data.Entities;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Task = BasicTaskList.RazorPages.Data.Entities.Task;
