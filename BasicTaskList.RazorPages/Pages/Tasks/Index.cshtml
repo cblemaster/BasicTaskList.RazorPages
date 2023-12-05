@@ -18,6 +18,9 @@ else if (Model.Folder != null)
     <a asp-page="Create" asp-route-folderid="@Model.FolderId">Create New</a>
 </p>
 
+<!-- TODO: There is something weird with the querystrings that this generates -->
+<!-- For example: https://localhost:7246/Tasks?folderid=1&IsShowingCompletedTasks=true&IsShowingCompletedTasks=false -->
+<!-- And:         https://localhost:7246/Tasks?folderid=1&IsShowingCompletedTasks=false -->
 <form method="get" name="form">
     <div class="form-group form-check">
         <input type="hidden" name="folderid" value="@Model.FolderId" />
