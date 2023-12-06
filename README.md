@@ -15,9 +15,9 @@
 - See the details of a task
 - Add a new (empty) folder
 - Rename a folder
-- Delete a folder (along with its contents)
+- Delete a folder (along with its tasks)
 - Add a new task to a folder
-- Make changes to a task's details, including changing a task's folder
+- Make changes to a task's details, including changing the task's folder
 - Save changes to a task's details
 - Cancel changes to a task's details
 - Delete a task from a folder
@@ -35,9 +35,17 @@
 - Tasks shown in a list are always sorted by Due Date, then by Name
 
 ### Instructions for running the application:
-- Instructions for creating the database from the provided script: TBD
-- Clone the repo, run the solution
+- Clone or download the repo
+- Set up the SQL Server database
+	- Go to \BasicTaskList.RazorPages\BasicTaskList.RazorPages\Data\Database
+	- There are two (2) script files here:
+		- basictasklist-create-db-script.sql: running this script is required and it will create the database and tables
+		- basictasklist-load-sample-data-script.sql: running this script is optional and it will insert some sample folder and task data into the database
+- Connection string
+	- In appsettings.json, update the "Project" connection string to point to your database
+	- Run the solution
 
 ### Improvement Opportunities:
-- TBD
-
+- See TODOs in the source code
+- Upgrade to .NET 8
+- Add Identity and allow different users to have different folders

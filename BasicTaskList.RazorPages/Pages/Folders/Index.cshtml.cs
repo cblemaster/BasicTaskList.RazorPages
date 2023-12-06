@@ -20,7 +20,7 @@ namespace BasicTaskList.RazorPages.Pages.Folders
                 /* TODO: Optimize this query for performance; the only reason
                    I am including the tasks is so I can count them later
                 */
-                
+
                 Folder = await _context.Folders.Include(f => f.Tasks).OrderBy(f => f.Name).ToListAsync();
             }
         }
